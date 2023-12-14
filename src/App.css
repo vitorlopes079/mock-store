@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (min-width: 540px) and (max-width: 720px) {
+  .custom-width-style {
+    width: 520px;
+  }
+}
+
+.image-container {
+  position: relative;
+}
+
+.opacity-75 {
+  opacity: 0.60; 
+}
+
+.overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 6rem;
+  justify-content: center;
+ 
+}
