@@ -23,4 +23,4 @@ Welcome to Haute Couture, a React-based mock clothing store that brings together
 
 Vitor Lopes Sousa - [vitorlopes079@gmail.com](mailto:vitorlopes079@gmail.com)
 
-Project Link: [https://github.com/vitorlopes079/mock-store](https://github.com/vitorlopes079/mock-store)add 
+Project Link: [https://github.com/vitorlopes079/mock-store](https://github.com/vitorlopes079/mock-store)
