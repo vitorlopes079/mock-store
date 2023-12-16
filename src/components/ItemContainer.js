@@ -17,7 +17,7 @@ function ItemContainer({ id, title, price, description, image, category }) {
   return (
     <div className="min-h-96 w-44 mt-8 mb-12 mx-5 flex flex-col items-center justify-center mx-auto">
       <Link to={productUrl}>
-        <img link="" src={image} className="h-48 w-full my-6" />
+        <img link="" src={image} alt={`${title} in category ${category}`} className="h-48 w-full my-6" />
       </Link>
 
       <div className="font-josefin flex-grow p-3 flex flex-col justify-between">

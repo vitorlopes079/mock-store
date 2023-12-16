@@ -53,7 +53,7 @@ function Product() {
   return (
     <div className="flex flex-col md:flex-row justify-center w-64 my-8 md:w-5/6">
       <div className="flex justify-center">
-        <img src={path.image} className="h-72 w-54 md:h-96 md:w-72" />
+        <img src={path.image} alt={`${path.title} in category ${categoryName}`} className="h-72 w-54 md:h-96 md:w-72" />
       </div>
 
       <div className="flex flex-col justify-center item-center mt-0 md:ml-8 md:w-72">
