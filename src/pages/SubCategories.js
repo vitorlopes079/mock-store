@@ -1,45 +1,62 @@
 import React from "react";
-
 import { useParams, NavLink } from "react-router-dom";
-import { products } from "../products";
+import {
+  menTopSelectors,
+  menBottomSelectors,
+  womenTopSelectors,
+  womenBottomSelectors,
+} from "../store/features/products/productsSlice";
+import { useSelector } from "react-redux";
 
 function SubCategories() {
-  const { subcategories } = useParams();
+  const { subCategory } = useParams();
 
-  const manTop = products.man.top.find((product) => product.id === 4);
-  const manBottom = products.man.bottom.find((product) => product.id === 31);
-  const womenTop = products.women.top.find((product) => product.id === 34);
-  const womenBottom = products.women.bottom.find(
-    (product) => product.id === 54
+  const selectProductImageById = (adapterSelectors, state, id) => {
+    const allItems = adapterSelectors.selectAll(state);
+    const foundItem = allItems.find((item) => item.id === id);
+    return foundItem ? foundItem.image : null;
+  };
+
+  const menTopImage = useSelector((state) =>
+    selectProductImageById(menTopSelectors, state, 4)
+  );
+  const menBottomImage = useSelector((state) =>
+    selectProductImageById(menBottomSelectors, state, 31)
+  );
+  const womenTopImage = useSelector((state) =>
+    selectProductImageById(womenTopSelectors, state, 34)
+  );
+  const womenBottomImage = useSelector((state) =>
+    selectProductImageById(womenBottomSelectors, state, 54)
   );
 
   return (
     <div className="flex">
       <div className="image-container h-96 md:w-72 mx-5 relative">
-        <NavLink to={`/category/${subcategories}-top`}>
+        <NavLink to={`/category/${subCategory}Top`}>
           <img
             className="opacity-75"
-            src={subcategories === "man" ? manTop.image : womenTop.image}
-            alt={subcategories === "man" ? manTop.title : womenTop.title}
+            src={subCategory === "men" ? menTopImage : womenTopImage}
+            alt={subCategory === "men" ? "men top" : "women top"}
           />
           <div className="overlay-text absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <p className="font-montserrat text-gray-900 text-xl font-extrabold uppercase">
-              {subcategories} top
+            <p className="font-pacifico text-black text-5xl font-extrabold ">
+              {subCategory} top
             </p>
           </div>
         </NavLink>
       </div>
 
       <div className="image-container h-96 md:w-72 mx-5 relative">
-        <NavLink to={`/category/${subcategories}-bottom`}>
+        <NavLink to={`/category/${subCategory}Bottom`}>
           <img
             className="opacity-75"
-            src={subcategories === "man" ? manBottom.image : womenBottom.image}
-            alt={subcategories === "man" ? manBottom.title : womenBottom.title}
+            src={subCategory === "men" ? menBottomImage : womenBottomImage}
+            alt={subCategory === "men" ? "mae bottom" : "women bottom"}
           />
           <div className="overlay-text absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <p className="font-montserrat text-gray-900 text-xl font-extrabold uppercase">
-              {subcategories} bottom
+            <p className="font-pacifico text-black text-5xl font-extrabold ">
+              {subCategory} bottom
             </p>
           </div>
         </NavLink>

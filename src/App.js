@@ -6,8 +6,18 @@ import CategoryProducts from "./pages/CategoryProducts";
 import Product from "./pages/Product";
 import Contact from "./pages/Contact";
 import SubCategories from "./pages/SubCategories";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "./store/features/products/productsSlice";
+import Login from "./pages/Login";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -21,9 +31,17 @@ function App() {
             path="category/:categoryName/product/:id"
             element={<Product />}
           />
-          <Route path="/contact" element={<Contact />}/>
-          <Route path="/subcategories/:subcategories" element={<SubCategories />}/>
+          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/subcategories/:subCategory"
+            element={<SubCategories />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
         </Route>
+        
       </Routes>
     </BrowserRouter>
   );

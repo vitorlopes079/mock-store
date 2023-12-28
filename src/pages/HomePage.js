@@ -3,19 +3,23 @@ import logo from "../images/logo.png";
 import model from "../images/model.jpg";
 import model2 from "../images/model2.jpg";
 import ItemContainer from "../components/ItemContainer";
-import { products } from "../products";
-import AboutUs from "./AboutUs";
+import { useSelector } from "react-redux";
+import {
+  menTopSelectors,
+  menBottomSelectors,
+  womenTopSelectors,
+  womenBottomSelectors,
+  accessoriesSelectors,
+} from "../store/features/products/productsSlice";
+import AboutUs from "../components/AboutUs";
 
 function HomePage() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const bestSellers = [];
-  bestSellers.push(products.man.top.find((product) => product.id === 5));
-  bestSellers.push(products.man.bottom.find((product) => product.id === 29));
-  bestSellers.push(products.women.top.find((product) => product.id === 46));
-  bestSellers.push(products.women.bottom.find((product) => product.id === 63));
-  bestSellers.push(products.accessories.find((product) => product.id === 74));
-  bestSellers.push(products.accessories.find((product) => product.id === 65));
+  const menTop = useSelector(menTopSelectors.selectAll);
+  const menBottom = useSelector(menBottomSelectors.selectAll);
+  const womenTop = useSelector(womenTopSelectors.selectAll);
+  const womenBottom = useSelector(womenBottomSelectors.selectAll);
+  const accessories = useSelector(accessoriesSelectors.selectAll);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,9 +33,37 @@ function HomePage() {
     };
   }, []);
 
+  const combinedProducts = [
+    ...menTop,
+    ...menBottom,
+    ...womenTop,
+    ...womenBottom,
+    ...accessories,
+  ];
+
+  function shuffleArray(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
+  const ourBestSellers = shuffleArray(combinedProducts).slice(0, 6);
+
+
   return (
     <div>
-      <div className="bg-white h-44 sm:h-32 md:h-32 border-b-2 border-t-4 border-black relative ">
+      <div className="bg-white h-44 sm:h-32 md:h-32 border-b border-t border-black relative ">
         <p className="font-josefin text-gray-900  p-4 md:p-6 md:text-lg md:p-6 md:leading-relaxed md:text-center">
           Discover elegance and savings at Haute Couture. Enjoy free shipping on
           orders over $100. Shop your favorites now — a world of style awaits.
@@ -43,7 +75,7 @@ function HomePage() {
           className="absolute right-5 -bottom-14  w-28 h-28 "
         />
       </div>
-      <div className="flex justify-center items-center md:bg-gray-400 border-b-2 border-black w-full">
+      <div className="flex justify-center items-center md:bg-gray-400 border-b border-black w-full">
         <img
           className="md:rounded w-full"
           src={windowWidth > 768 ? model : model2}
@@ -51,7 +83,7 @@ function HomePage() {
         />
       </div>
       <div className="mt-20">
-        <h2 className="font-josefin text-3xl text-center text-gray-900 font-bold mt-8 uppercase">
+        <h2 className="font-pacifico text-4xl text-center text-gray-900 font-bold mt-8 ">
           Our Best Sellers
         </h2>
         <div className="flex justify-center">
@@ -59,7 +91,7 @@ function HomePage() {
             className="flex justify-around flex-wrap my-6 "
             style={{ maxWidth: "694px" }}
           >
-            {bestSellers.map((item) => (
+            {ourBestSellers.map((item) => (
               <ItemContainer
                 key={item.id}
                 id={item.id}

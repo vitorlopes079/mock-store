@@ -1,35 +1,54 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../products";
 import ItemContainer from "../components/ItemContainer";
+import {
+  menTopSelectors,
+  menBottomSelectors,
+  womenTopSelectors,
+  womenBottomSelectors,
+  accessoriesSelectors,
+} from "../store/features/products/productsSlice";
+import { useSelector } from "react-redux";
 
 function CategoryProducts() {
-  let { categoryName } = useParams();
+  const { categoryName } = useParams();
+  const menTop = useSelector(menTopSelectors.selectAll);
+  const menBottom = useSelector(menBottomSelectors.selectAll);
+  const womenTop = useSelector(womenTopSelectors.selectAll);
+  const womenBottom = useSelector(womenBottomSelectors.selectAll);
+  const accessories = useSelector(accessoriesSelectors.selectAll);
 
-  // Check if the category name includes a subcategory
-  const categoryParts = categoryName.split("-");
-  const mainCategory = categoryParts[0];
-  const subCategory = categoryParts[1];
+  let productArray;
+  let text;
 
-  // Determine the correct product array to map over
-  // If there's no subcategory, it will default to the main category
-  const productArray = subCategory
-    ? products[mainCategory]?.[subCategory]
-    : products[mainCategory];
-  const text = subCategory
-    ? `Haute Couture for ${mainCategory}`
-    : "Haute Couture Accessories";
+  if (categoryName === "menTop") {
+    productArray = menTop;
+    text = 'Haute Couture for Men'
+  } else if (categoryName === "menBottom") {
+    productArray = menBottom;
+    text = 'Haute Couture for Men'
+  } else if (categoryName === "womenTop") {
+    productArray = womenTop;
+    text = 'Haute Couture for Women'
+  } else if (categoryName === "womenBottom") {
+    productArray = womenBottom;
+    text = 'Haute Couture for Women'
+  } else if (categoryName === "accessories") {
+    productArray = accessories;
+    text = "Haute Couture's accessories"
+  }
+
 
   return (
     <>
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 text-center mt-12 uppercase tracking-wide">
+        <h1 className="font-pacifico text-3xl font-bold text-gray-900 text-center mt-10 tracking-wide">
           {text}
         </h1>
       </div>
       <div className="flex justify-center">
         <div
-          className="flex justify-around flex-wrap my-6 custom-width-style"
+          className="flex justify-around flex-wrap  custom-width-style"
           style={{ maxWidth: "740px" }}
         >
           {productArray &&

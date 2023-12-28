@@ -1,10 +1,15 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBagShopping, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBagShopping,
+  faBars,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import SideNavBar from "./SideNavBar";
-import Bag from "../pages/bag/Bag";
-import { useNavigate } from "react-router-dom";
+import Bag from "../store/features/bag/Bag";
+import { useNavigate, Link } from "react-router-dom";
+import Logo from "./Logo";
 
 function Header({ toggleBag, toggleMenu, isMenuOpen }) {
   const navigate = useNavigate();
@@ -27,20 +32,22 @@ function Header({ toggleBag, toggleMenu, isMenuOpen }) {
           className="text-gray-100 text-xl cursor-pointer"
           onClick={toggleMenu}
         />
-        <h2
-          onClick={handleLogoClick}
-          className="font-montserrat font-bold text-xl text-gray-100 tracking-wide uppercase shadow-xs cursor-pointer"
-        >
-          Haute Couture
-        </h2>
+        <Logo handleLogoClick={handleLogoClick} />
         <div className="relative">
+          <Link to="login">
+            <FontAwesomeIcon
+              icon={faUser}
+              className="text-gray-100 text-xl  cursor-pointer mr-2"
+            />
+          </Link>
+
           <FontAwesomeIcon
             icon={faBagShopping}
-            className="text-gray-100 text-2xl cursor-pointer"
+            className="text-gray-100 text-xl cursor-pointer"
             onClick={toggleBag}
           />
           {totalQuantity > 0 && (
-            <span className="absolute -top-1 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5">
+            <span className="absolute -top-1 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5 ">
               {totalQuantity}
             </span>
           )}

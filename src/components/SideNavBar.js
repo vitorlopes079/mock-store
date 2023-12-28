@@ -10,7 +10,7 @@ function SideNavBar({ isMenuOpen, toggleMenu }) {
   const menuStyle = {
     position: "fixed",
     top: 0,
-    left: isMenuOpen ? 0 : "-100%",
+    left: isMenuOpen ? 0 : "-150%",
     width: "350px",
     height: "100vh",
     color: "white",
@@ -44,14 +44,14 @@ function SideNavBar({ isMenuOpen, toggleMenu }) {
           {showManSubcategories && (
             <div className="flex flex-col pl-4">
               <NavLink
-                to="/category/man-top"
+                to="/category/menTop"
                 onClick={toggleMenu}
                 className="font-montserrat my-3 hover:bg-gray-200 p-2 rounded text-gray-900 text-lg font-bold tracking-wider border-b-2"
               >
                 Top
               </NavLink>
               <NavLink
-                to="/category/man-bottom"
+                to="/category/menBottom"
                 onClick={toggleMenu}
                 className="font-montserrat my-3 hover:bg-gray-200 p-2 rounded text-gray-900 text-lg font-bold tracking-wider border-b-2"
               >
@@ -71,14 +71,14 @@ function SideNavBar({ isMenuOpen, toggleMenu }) {
           {showWomenSubcategories && (
             <div className="flex flex-col pl-4">
               <NavLink
-                to="/category/women-top"
+                to="/category/womenTop"
                 onClick={toggleMenu}
                 className="font-montserrat my-3 hover:bg-gray-200 p-2 rounded text-gray-900 text-lg font-bold tracking-wider border-b-2"
               >
                 Top
               </NavLink>
               <NavLink
-                to="/category/women-bottom"
+                to="/category/womenBottom"
                 onClick={toggleMenu}
                 className="font-montserrat my-3 hover:bg-gray-200 p-2 rounded text-gray-900 text-lg font-bold tracking-wider border-b-2"
               >
