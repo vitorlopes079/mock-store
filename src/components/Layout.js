@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
 import Footer from "./Footer";
 import Bag from "../store/features/bag/Bag";
@@ -34,7 +34,7 @@ function Layout() {
     right: 0,
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 40, 
+    zIndex: 40,
     display: isBagOpen || isMenuOpen ? "block" : "none",
   };
 
@@ -43,7 +43,7 @@ function Layout() {
       {isDesktop ? (
         <HeaderDesktop toggleBag={toggleBag} />
       ) : (
-        <Header
+        <HeaderMobile
           toggleBag={toggleBag}
           toggleMenu={toggleMenu}
           isMenuOpen={isMenuOpen}

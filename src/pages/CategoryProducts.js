@@ -23,21 +23,20 @@ function CategoryProducts() {
 
   if (categoryName === "menTop") {
     productArray = menTop;
-    text = 'Haute Couture for Men'
+    text = "Haute Couture for Men";
   } else if (categoryName === "menBottom") {
     productArray = menBottom;
-    text = 'Haute Couture for Men'
+    text = "Haute Couture for Men";
   } else if (categoryName === "womenTop") {
     productArray = womenTop;
-    text = 'Haute Couture for Women'
+    text = "Haute Couture for Women";
   } else if (categoryName === "womenBottom") {
     productArray = womenBottom;
-    text = 'Haute Couture for Women'
+    text = "Haute Couture for Women";
   } else if (categoryName === "accessories") {
     productArray = accessories;
-    text = "Haute Couture's accessories"
+    text = "Haute Couture's accessories";
   }
-
 
   return (
     <>

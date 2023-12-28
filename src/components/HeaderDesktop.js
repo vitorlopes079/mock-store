@@ -1,10 +1,9 @@
 import React from "react";
-import { useNavigate, NavLink, Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBagShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import Bag from "../store/features/bag/Bag";
 import Logo from "./Logo";
+import Icons from "./Icons";
 
 function HeaderDesktop({ toggleBag }) {
   const navigate = useNavigate();
@@ -61,26 +60,7 @@ function HeaderDesktop({ toggleBag }) {
           </NavLink>
         </div>
 
-        <div className="relative mr-4">
-          <Link to="login">
-            <FontAwesomeIcon
-              icon={faUser}
-              className="text-gray-100 text-2xl cursor-pointer mr-5"
-            />
-          </Link>
-
-          <FontAwesomeIcon
-            icon={faBagShopping}
-            className="text-gray-100 text-2xl cursor-pointer "
-            onClick={toggleBag}
-          />
-
-          {totalQuantity > 0 && (
-            <span className="absolute -top-1 -right-2 bg-red-400 text-black-400 text-xs rounded-full px-1.5 py-0.5">
-              {totalQuantity}
-            </span>
-          )}
-        </div>
+        <Icons toggleBag={toggleBag} totalQuantity={totalQuantity} />
       </nav>
 
       <Bag toggleBag={toggleBag} />
