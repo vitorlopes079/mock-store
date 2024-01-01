@@ -10,6 +10,9 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "./store/features/products/productsSlice";
 import Login from "./pages/Login";
+import NewAccount from "./pages/NewAccount";
+import User from "./pages/User";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,12 +39,12 @@ function App() {
             path="/subcategories/:subCategory"
             element={<SubCategories />}
           />
-          <Route
-            path="/login"
-            element={<Login />}
-          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/newAccount" element={<NewAccount />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/user" element={<User />} />
+          </Route>
         </Route>
-        
       </Routes>
     </BrowserRouter>
   );

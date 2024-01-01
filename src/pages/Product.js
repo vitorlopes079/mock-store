@@ -131,7 +131,7 @@ function Product() {
         </div>
         <button
           onClick={handleAddToBag}
-          className={`mt-2 px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-red-400 border-2 border-gray-900 focus:outline-none ${
+          className={`mt-2 px-6 py-2 transition ease-in duration-200 uppercase rounded-lg hover:bg-gray-800 hover:text-red-400 border-2 border-gray-900 focus:outline-none ${
             selectedSize ? "" : "opacity-50 cursor-not-allowed"
           }`}
           disabled={!selectedSize}

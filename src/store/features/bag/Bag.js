@@ -113,7 +113,7 @@ function Bag({ isBagOpen, toggleBag }) {
           <div className="flex justify-center items-center p-4">
             <button
               href="#_"
-              className="relative px-5 py-2 overflow-hidden font-medium text-gray-900 bg-gray-300 border border-gray-100 rounded-full shadow-inner group w-64 mt-5"
+              className="relative px-5 py-2 overflow-hidden font-medium text-gray-900 bg-gray-300 border border-gray-100 rounded-lg shadow-inner group w-64 mt-5"
             >
               <span className="absolute top-0 left-0 w-0 h-0 transition-all duration-200 border-t-2 border-gray-600 group-hover:w-full ease"></span>
               <span className="absolute bottom-0 right-0 w-0 h-0 transition-all duration-200 border-b-2 border-gray-600 group-hover:w-full ease"></span>

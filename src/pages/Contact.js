@@ -86,7 +86,7 @@ function Contact() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className={`mt-4 px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none ${
+              className={`mt-4 px-6 py-1 transition ease-in duration-200 rounded-lg hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none ${
                 formData.name && formData.email && formData.message
                   ? ""
                   : "opacity-50 cursor-not-allowed"

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   menTopSelectors,
   menBottomSelectors,
@@ -33,7 +33,7 @@ function SubCategories() {
   return (
     <div className="flex">
       <div className="image-container h-96 md:w-72 mx-5 relative">
-        <NavLink to={`/category/${subCategory}Top`}>
+        <Link to={`/category/${subCategory}Top`}>
           <img
             className="opacity-75"
             src={subCategory === "men" ? menTopImage : womenTopImage}
@@ -44,11 +44,11 @@ function SubCategories() {
               {subCategory} top
             </p>
           </div>
-        </NavLink>
+        </Link>
       </div>
 
       <div className="image-container h-96 md:w-72 mx-5 relative">
-        <NavLink to={`/category/${subCategory}Bottom`}>
+        <Link to={`/category/${subCategory}Bottom`}>
           <img
             className="opacity-75"
             src={subCategory === "men" ? menBottomImage : womenBottomImage}
@@ -59,7 +59,7 @@ function SubCategories() {
               {subCategory} bottom
             </p>
           </div>
-        </NavLink>
+        </Link>
       </div>
     </div>
   );
