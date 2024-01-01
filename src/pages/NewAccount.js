@@ -56,9 +56,9 @@ const NewAccount = () => {
 
       // Handle successful account creation (e.g., redirecting the user or showing a success message)
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // Handle errors here (e.g., showing an error message to the user)
+      console.log(error.code)
+      console.log(error.message)
+      
     }
   };
 
