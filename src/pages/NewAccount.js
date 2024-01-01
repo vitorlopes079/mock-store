@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebase";
 import NewUserForm from "../components/NewUserForm";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setNewUser } from "../store/features/auth/authSlice";
 
 const NewAccount = () => {
   const [name, setName] = useState("");
@@ -11,6 +14,9 @@ const NewAccount = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const auth = getAuth();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -52,15 +58,28 @@ const NewAccount = () => {
         name: name,
         surname: surname,
         email: email,
-      })
+      });
 
+      dispatch(
+        setNewUser({
+          uid: user.uid,
+          email: email,
+          name: name,
+          surname: surname,
+        })
+      );
       // Handle successful account creation (e.g., redirecting the user or showing a success message)
     } catch (error) {
-      console.log(error.code)
-      console.log(error.message)
-      
+      console.log(error.code);
+      console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    if (authState.user) {
+      navigate("/user");
+    }
+  }, [authState.user, navigate]);
 
   return (
     <NewUserForm

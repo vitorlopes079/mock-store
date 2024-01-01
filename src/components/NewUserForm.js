@@ -117,9 +117,9 @@ const NewUserForm = ({
         <div className="flex justify-center">
           <button
             type="submit"
-            className="my-4 px-6 py-1 transition ease-in duration-200  w-1/3 rounded-lg hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none"
+            className="my-4 px-6 py-1 transition ease-in duration-200  w-1/2 rounded-lg hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none"
           >
-            Login
+            Create account
           </button>
         </div>
       </form>
