@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../store/features/auth/authSlice"
+import { loginUser } from "../store/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
@@ -20,8 +20,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(loginUser({email, password}));
-    
+    dispatch(loginUser({ email, password }));
   };
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const Login = () => {
 
   return (
     <div className="mx-auto my-4 w-2/4 lg:w-1/4 ">
-      <h1 className="font-josefin text-4xl text-gray-900 font-bold py-5  text-center">
+      <h1 className="font-poppins text-4xl text-gray-900 font-bold py-5  text-center">
         Login
       </h1>
       <p className="font-nunito text-gray-900 mb-4 text-center">
@@ -49,6 +48,8 @@ const Login = () => {
             required
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
+            autoComplete="username"
+            
           />
           <label
             htmlFor="email"
@@ -68,6 +69,7 @@ const Login = () => {
             required
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
+            autoComplete="current-password"
           />
           <label
             htmlFor="password"
@@ -76,6 +78,11 @@ const Login = () => {
             Password:
           </label>
         </div>
+
+        {/* Display error message */}
+        {authState.error && (
+          <div className="text-red-500 text-center mt-2">{authState.error}</div>
+        )}
 
         {/* Submit Button */}
         <button
@@ -88,7 +95,7 @@ const Login = () => {
       <p className="font-nunito text-gray-800 mt-2 mb-4 italic text-center">
         Don't have an account?{" "}
         <Link to="/login/newAccount">
-          <span>Create one</span>
+          <span className="font-bold text-red-400 ml-1">Create one</span>
         </Link>
       </p>
     </div>

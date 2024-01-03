@@ -10,6 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/features/bag/bagSlice";
 import { useSelector } from "react-redux";
+import NotFound from "./NotFound";
 
 function Product() {
   const [selectedSize, setSelectedSize] = useState("");
@@ -42,7 +43,7 @@ function Product() {
 
   if (!product) {
     // If product is not found, return a message or handle as needed
-    return <p>Product not found.</p>;
+    return <NotFound />
   }
 
   // Function to handle incrementing the quantity
@@ -79,7 +80,7 @@ function Product() {
       </div>
 
       <div className="flex flex-col justify-center item-center mt-0 md:ml-10 md:w-72">
-        <h1 className="font-josefin font-bold text-gray-900 py-1 pt-4  md:text-2xl md:py-0 md:pb-2">
+        <h1 className="font-poppins font-bold text-gray-900 py-1 pt-4  md:text-2xl md:py-0 md:pb-2">
           {product.title}
         </h1>
         <p className="font-nunito text-sm  tracking-wide text-gray-900 italic">

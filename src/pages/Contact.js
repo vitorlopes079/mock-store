@@ -17,7 +17,7 @@ function Contact() {
   return (
     <div className="flex flex-col justify-center md:w-3/6 md:mt-6 md:text-lg">
       <div className="flex flex-col justify-center items-center">
-        <h1 className="font-josefin text-3xl text-gray-900 font-bold py-5 w-5/6">
+        <h1 className="font-poppins text-3xl text-gray-900 font-bold py-5 w-5/6">
           Contact Us
         </h1>
         <p className="font-nunito text-gray-900 text-justify mb-4 w-5/6">

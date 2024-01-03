@@ -13,6 +13,7 @@ const NewAccount = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,6 +59,10 @@ const NewAccount = () => {
         name: name,
         surname: surname,
         email: email,
+        addressLine1: "",
+        addressLine2: "",
+        postcode: "",
+        city: "",
       });
 
       dispatch(
@@ -70,8 +75,15 @@ const NewAccount = () => {
       );
       // Handle successful account creation (e.g., redirecting the user or showing a success message)
     } catch (error) {
-      console.log(error.code);
-      console.log(error.message);
+      if (error.code === "auth/email-already-in-use") {
+        setErrorMessage(
+          "The email address is already in use by another account."
+        );
+      } else {
+        setErrorMessage(
+          "An error occurred during account creation. Please try again."
+        );
+      }
     }
   };
 
@@ -94,6 +106,7 @@ const NewAccount = () => {
       handlePasswordChange={handlePasswordChange}
       handleConfirmPasswordChange={handleConfirmPasswordChange}
       handleSubmit={handleSubmit}
+      errorMessage={errorMessage}
     />
   );
 };

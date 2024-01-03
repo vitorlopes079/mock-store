@@ -10,7 +10,8 @@ module.exports = {
         'nunito': ['Nunito', 'sans-serif'],
         'raleway': ['Raleway', 'sans-serif'],
         'josefin': ['Josefin Sans', 'sans-serif'],
-        'pacifico' : ['Pacifico', 'sans-serif']
+        'pacifico': ['Pacifico', 'sans-serif'],
+        'poppins': ['Poppins', 'sans-serif']
       }
     },
   },

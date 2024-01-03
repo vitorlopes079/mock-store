@@ -12,10 +12,11 @@ const NewUserForm = ({
   handlePasswordChange,
   handleConfirmPasswordChange,
   handleSubmit,
+  errorMessage,
 }) => {
   return (
     <div className="mx-auto my-4  w-2/4 lg:w-1/3 ">
-      <h1 className="font-josefin text-4xl text-gray-900 font-bold py-5  mb-4 text-center">
+      <h1 className="font-poppins text-4xl text-gray-900 font-bold py-5  mb-4 text-center">
         Create new account
       </h1>
       <form onSubmit={handleSubmit}>
@@ -113,6 +114,11 @@ const NewUserForm = ({
             Confirm Password:
           </label>
         </div>
+
+        {/* Display error message */}
+        {errorMessage && (
+          <div className="text-red-500 text-center mt-2">{errorMessage}</div>
+        )}
 
         <div className="flex justify-center">
           <button

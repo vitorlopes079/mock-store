@@ -22,7 +22,7 @@ function ItemContainer({ id, title, price, description, image, category }) {
         />
       </Link>
 
-      <div className="font-josefin flex-grow p-3 flex flex-col justify-between">
+      <div className="font-poppins flex-grow p-3 flex flex-col justify-between">
         <Link to={productUrl} className="text-gray-700 font-bold h-12 overflow-hidden">
           {truncatedTitle}
         </Link>

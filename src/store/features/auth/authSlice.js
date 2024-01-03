@@ -27,7 +27,20 @@ export const loginUser = createAsyncThunk(
         surname: userDoc.data().surname,
       };
     } catch (error) {
-      return console.log(error.message);
+      // Handle different error scenarios
+      let errorMessage = "";
+      console.log(error.code);
+      if (
+        error.code === "auth/wrong-password" ||
+        error.code === "auth/user-not-found" ||
+        "auth/invalid-credential"
+      ) {
+        errorMessage = "Email or password is incorrect";
+      } else {
+        errorMessage = "An unexpected error occurred. Please try again later.";
+      }
+
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );

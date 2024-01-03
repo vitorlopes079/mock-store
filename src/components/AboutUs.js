@@ -14,7 +14,7 @@ function AboutUs() {
           />
 
           <div>
-            <h1 className="font-josefin text-3xl text-gray-900 font-bold py-5">
+            <h1 className="font-poppins text-3xl text-gray-900 font-bold py-5">
               About Haute Couture
             </h1>
             <p className="font-nunito text-gray-900 text-justify mb-4 md:tracking-wide">
