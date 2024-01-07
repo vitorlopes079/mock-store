@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
-import Logo from "../components/Logo";
+
 
 const OrderConfirmation = () => {
   const [numberOfPieces, setNumberOfPieces] = useState(60);
