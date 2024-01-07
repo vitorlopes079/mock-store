@@ -6,6 +6,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.roboto-font {
-  font-family: "Roboto", sans-serif;
+
+@layer components {
+  .h1-style-1 {
+    @apply font-pacifico text-2xl md:text-4xl text-center text-gray-900 font-bold;
+  }
+  .h1-style-2 {
+    @apply font-poppins text-xl md:text-3xl text-gray-900 font-bold ;
+  }
 }

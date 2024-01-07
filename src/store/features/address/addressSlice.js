@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { firestore } from "../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
-
 export const updateAddress = createAsyncThunk(
   "address/updateAddress",
   async ({ userId, newAddress }, thunkAPI) => {
@@ -14,7 +13,7 @@ export const updateAddress = createAsyncThunk(
         addressLine1: newAddress.addressLine1,
         addressLine2: newAddress.addressLine2,
         postcode: newAddress.postcode,
-        city: newAddress.city
+        city: newAddress.city,
       };
 
       await updateDoc(docRef, addressUpdate);
@@ -29,8 +28,6 @@ export const updateAddress = createAsyncThunk(
 export const fetchAddress = createAsyncThunk(
   "address/fetchAddress",
   async (userId, thunkAPI) => {
-
-    console.log("function called")
     try {
       const docRef = doc(firestore, "users", userId);
       const docSnap = await getDoc(docRef);
@@ -38,7 +35,7 @@ export const fetchAddress = createAsyncThunk(
       if (docSnap.exists()) {
         // Assuming the address fields are stored at the root of the user document
         const { addressLine1, addressLine2, postcode, city } = docSnap.data();
-        console.log(addressLine1, addressLine2, postcode, city)
+
         return { addressLine1, addressLine2, postcode, city };
       } else {
         throw new Error("No such document!");
@@ -86,4 +83,4 @@ const addressSlice = createSlice({
   },
 });
 
-export default addressSlice.reducer
+export default addressSlice.reducer;

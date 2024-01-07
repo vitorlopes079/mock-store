@@ -48,7 +48,13 @@ export const bagSlice = createSlice({
       const { name, size } = action.payload;
       state.items = state.items.filter(item => item.name !== name || item.size !== size);
       state.totalAmount = calculateTotal(state.items);
+    },
+
+    removeAllTheItems: (state) => {
+      state.items = []
+      state.totalAmount = 0
     }
+    
   },
 });
 
@@ -59,7 +65,7 @@ const calculateTotal = (items) => {
   }, 0);
 };
 
-export const { addItem, incrementQuantity, decrementQuantity,  removeItem } =
+export const { addItem, incrementQuantity, decrementQuantity,  removeItem,  removeAllTheItems } =
   bagSlice.actions;
 
 export default bagSlice.reducer;

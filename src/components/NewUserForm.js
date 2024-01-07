@@ -15,8 +15,8 @@ const NewUserForm = ({
   errorMessage,
 }) => {
   return (
-    <div className="mx-auto my-4  w-2/4 lg:w-1/3 ">
-      <h1 className="font-poppins text-4xl text-gray-900 font-bold py-5  mb-4 text-center">
+    <div className="mx-auto my-4 px-6 md:px-0 sm:w-2/4 lg:w-1/4 ">
+      <h1 className=" h1-style-2 text-3xl py-4 text-center md:py-5 md:text-4xl">
         Create new account
       </h1>
       <form onSubmit={handleSubmit}>
@@ -123,7 +123,7 @@ const NewUserForm = ({
         <div className="flex justify-center">
           <button
             type="submit"
-            className="my-4 px-6 py-1 transition ease-in duration-200  w-1/2 rounded-lg hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none"
+            className="my-4 px-6 py-1 transition ease-in duration-200 rounded-lg hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none md:w-1/2"
           >
             Create account
           </button>

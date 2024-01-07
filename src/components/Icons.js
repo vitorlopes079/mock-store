@@ -1,21 +1,21 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBagShopping } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
-const Icons = ({toggleBag, totalQuantity}) => {
+const Icons = ({ toggleBag, totalQuantity }) => {
   return (
-    <div className="relative mr-4 md:mr-0">
+    <div className="relative  md:mr-0">
       <Link to="login">
         <FontAwesomeIcon
           icon={faUser}
-          className="text-gray-100 cursor-pointer mr-2 md:text-2xl md:mr-5"
+          className="text-gray-100 text-xl  sm:text-2xl cursor-pointer mr-2 md:mr-5"
         />
       </Link>
 
       <FontAwesomeIcon
         icon={faBagShopping}
-        className="text-gray-100 text-xl md:text-2xl cursor-pointer"
+        className="text-gray-100 text-xl sm:text-2xl cursor-pointer"
         onClick={toggleBag}
       />
 

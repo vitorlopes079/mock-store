@@ -13,7 +13,7 @@ function ItemContainer({ id, title, price, description, image, category }) {
   const truncatedTitle = truncateDescription(title, 40);
 
   return (
-    <div className="min-h-96 w-44 mt-8 mb-12 mx-5 flex flex-col items-center justify-center mx-auto">
+    <div className="min-h-96 w-44 mt-8 mb-12 flex flex-col items-center justify-center mx-auto">
       <Link to={productUrl}>
         <img
           src={image}

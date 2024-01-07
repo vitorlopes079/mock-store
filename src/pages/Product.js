@@ -37,7 +37,6 @@ function Product() {
     }
   });
 
-  console.log(product);
 
   const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
@@ -63,6 +62,7 @@ function Product() {
       price: product.price,
       quantity: quantity,
       size: selectedSize,
+      id: product.id
     };
     dispatch(addItem(itemToAdd));
     setQuantity(1);
@@ -80,7 +80,7 @@ function Product() {
       </div>
 
       <div className="flex flex-col justify-center item-center mt-0 md:ml-10 md:w-72">
-        <h1 className="font-poppins font-bold text-gray-900 py-1 pt-4  md:text-2xl md:py-0 md:pb-2">
+        <h1 className="h1-style-2 text-base py-1 pt-4  md:text-2xl md:py-0 md:pb-2">
           {product.title}
         </h1>
         <p className="font-nunito text-sm  tracking-wide text-gray-900 italic">

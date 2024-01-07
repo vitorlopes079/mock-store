@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firestore, auth } from "../../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -45,6 +45,11 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logOutUser = createAsyncThunk("user,logOutUser", async () => {
+  await signOut(auth);
+  return {};
+});
+
 const initialState = {
   loading: false,
   user: null,
@@ -55,16 +60,17 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.user = null;
-      state.error = null;
-    },
-
     setNewUser: (state, action) => {
       state.user = action.payload;
       state.error = null;
     },
+
+    setCurrentUser: (state, action) => {
+      state.user = action.payload;
+      state.error = null;
+    },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
@@ -80,9 +86,13 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         state.user = null;
+      })
+      .addCase(logOutUser.fulfilled, (state) => {
+        state.user = null;
+        state.error = null;
       });
   },
 });
 
-export const { logout, setNewUser } = authSlice.actions;
+export const { setNewUser, setCurrentUser } = authSlice.actions;
 export default authSlice.reducer;

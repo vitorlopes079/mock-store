@@ -21,7 +21,7 @@ const Hero = () => {
   return (
     <div>
       <div className="bg-white h-44  border-b border-t border-black relative sm:h-32 md:h-32">
-        <p className="font-poppins text-gray-900  p-4 md:p-6 md:text-lg md:p-6 md:leading-relaxed">
+        <p className="font-poppins text-gray-900 p-4 md:p-6 md:text-lg md:leading-relaxed">
           Discover elegance and savings at Haute Couture. Enjoy free shipping on
           orders over $100. Shop your favorites now — a world of style awaits.
           Limited time offer.

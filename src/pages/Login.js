@@ -25,13 +25,13 @@ const Login = () => {
 
   useEffect(() => {
     if (authState.user) {
-      navigate("/user"); // Replace with your target path
+      navigate("/user"); 
     }
   }, [authState.user, navigate]);
 
   return (
-    <div className="mx-auto my-4 w-2/4 lg:w-1/4 ">
-      <h1 className="font-poppins text-4xl text-gray-900 font-bold py-5  text-center">
+    <div className="mx-auto my-4  sm:w-2/4 lg:w-1/4 ">
+      <h1 className="h1-style-2 py-4 text-center text-3xlmd:py-5 md:text-4xl ">
         Login
       </h1>
       <p className="font-nunito text-gray-900 mb-4 text-center">

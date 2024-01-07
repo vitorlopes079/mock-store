@@ -14,10 +14,10 @@ function AboutUs() {
           />
 
           <div>
-            <h1 className="font-poppins text-3xl text-gray-900 font-bold py-5">
+            <h1 className="h1-style-2 py-5">
               About Haute Couture
             </h1>
-            <p className="font-nunito text-gray-900 text-justify mb-4 md:tracking-wide">
+            <p className="font-nunito text-gray-900 text-lg text-justify mb-4 md:tracking-wide">
               Welcome to Haute Couture, where fashion meets originality and
               style embraces individuality. Established with a vision to
               revolutionize the way we see and wear clothes, Haute Couture is

@@ -30,7 +30,7 @@ const BestSellers = () => {
   return (
     <div>
       <div className="mt-20">
-        <h2 className="font-pacifico text-4xl text-center text-gray-900 font-bold mt-8 ">
+        <h2 className="h1-style-1 mt-8 ">
           Our Best Sellers
         </h2>
         <div className="flex justify-center">

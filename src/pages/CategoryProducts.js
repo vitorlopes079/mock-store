@@ -41,7 +41,7 @@ function CategoryProducts() {
   return (
     <>
       <div>
-        <h1 className="font-pacifico text-3xl font-bold text-gray-900 text-center mt-10 tracking-wide">
+        <h1 className="h1-style-1 mt-10 tracking-wide">
           {text}
         </h1>
       </div>

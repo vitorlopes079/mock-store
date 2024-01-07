@@ -3,11 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { incrementQuantity, decrementQuantity, removeItem } from "./bagSlice";
+import { auth } from "../../../firebase";
+import { useNavigate } from "react-router-dom";
 
 function Bag({ isBagOpen, toggleBag }) {
   const items = useSelector((state) => state.bag.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const totalAmount = useSelector((state) => state.bag.totalAmount);
+  const userId = auth.currentUser?.uid;
 
   const bagStyle = {
     position: "fixed",
@@ -19,6 +23,25 @@ function Bag({ isBagOpen, toggleBag }) {
     transition: "right 0.3s ease-in-out",
     zIndex: 100,
   };
+
+  function handleClick() {
+    const totalPrice = totalAmount;
+    const orderData = {
+      totalPrice: totalPrice,
+      userId,
+      products: items.map((item) => ({
+        id: item.id,
+        image: item.image,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        size: item.size,
+      })),
+    };
+
+    toggleBag();
+    navigate("/confirmOrder", { state: { orderData } });
+  }
 
   return (
     <div
@@ -47,7 +70,7 @@ function Bag({ isBagOpen, toggleBag }) {
           </p>
         </div>
       ) : (
-        <div>
+        <div className="flex flex-col justify-center items-center">
           {items.map((item, index) => {
             const price = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
             const total = item.quantity * price;
@@ -95,7 +118,9 @@ function Bag({ isBagOpen, toggleBag }) {
                         +
                       </button>
                     </div>
-                    <p className="text-xs font-bold text-blue-700">${total.toFixed(2)}</p>
+                    <p className="text-xs font-bold text-blue-700">
+                      ${total.toFixed(2)}
+                    </p>
                   </div>
                   <p
                     onClick={() =>
@@ -112,6 +137,7 @@ function Bag({ isBagOpen, toggleBag }) {
 
           <div className="flex justify-center items-center p-4">
             <button
+              onClick={handleClick}
               href="#_"
               className="relative px-5 py-2 overflow-hidden font-medium text-gray-900 bg-gray-300 border border-gray-100 rounded-lg shadow-inner group w-64 mt-5"
             >

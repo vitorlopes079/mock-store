@@ -14,9 +14,33 @@ import NewAccount from "./pages/NewAccount";
 import User from "./pages/User";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
+import ConfirmOrder from "./pages/ConfirmOrder";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase"; 
+import { setCurrentUser, logOutUser} from "./store/features/auth/authSlice";
+import OrderConfirmation from "./pages/OrderConfirmation";
+
 
 function App() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+  
+        dispatch(setCurrentUser({
+          uid: auth.currentUser.uid,
+          email: auth.currentUser.email,
+         
+        }));
+      } else {
+        dispatch(logOutUser())
+      }
+    });
+  
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -42,8 +66,11 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/login/newAccount" element={<NewAccount />} />
+          
+          <Route path="/confirmOrder" element={<ConfirmOrder />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/user" element={<User />} />
+            <Route path="orderConfirmation" element={<OrderConfirmation />}/>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
