@@ -12,15 +12,13 @@ const ConfirmOrder = () => {
   const orderData = location.state?.orderData;
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  
   const userId = auth.currentUser?.uid;
   const now = new Date();
   const formattedDate = `${
     now.getMonth() + 1
   }/${now.getDate()}/${now.getFullYear()}`; // Format: MM/DD/YYYY
-
-  console.log("total", orderData.totalPrice);
-  console.log("orderdata", orderData);
-
+ 
   const handleClick = () => {
     const order = {
       userId: userId,

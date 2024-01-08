@@ -6,12 +6,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .h1-style-1 {
     @apply font-pacifico text-2xl md:text-4xl text-center text-gray-900 font-bold;
   }
   .h1-style-2 {
-    @apply font-poppins text-xl md:text-3xl text-gray-900 font-bold ;
+    @apply font-poppins text-xl md:text-3xl text-gray-900 font-bold;
+  }
+
+  .p-style {
+    @apply font-nunito text-gray-900;
+  }
+
+  .input-style {
+    @apply block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 
+  }
+
+  .label-style {
+    @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
   }
 }

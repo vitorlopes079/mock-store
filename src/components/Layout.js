@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
 import Footer from "./Footer";
-import Bag from "../store/features/bag/Bag";
+import Bag from "./Bag";
 
 function Layout() {
   const [isBagOpen, setIsBagOpen] = useState(false);

@@ -2,8 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { incrementQuantity, decrementQuantity, removeItem } from "./bagSlice";
-import { auth } from "../../../firebase";
+import {
+  incrementQuantity,
+  decrementQuantity,
+  removeItem,
+} from "../store/features/bag/bagSlice";
+import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 function Bag({ isBagOpen, toggleBag }) {
@@ -11,6 +15,7 @@ function Bag({ isBagOpen, toggleBag }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const totalAmount = useSelector((state) => state.bag.totalAmount);
+  const isLoggedIn = useSelector((state) => state.auth.user);
   const userId = auth.currentUser?.uid;
 
   const bagStyle = {
@@ -38,9 +43,10 @@ function Bag({ isBagOpen, toggleBag }) {
         size: item.size,
       })),
     };
-
     toggleBag();
-    navigate("/confirmOrder", { state: { orderData } });
+    isLoggedIn
+      ? navigate("/confirmOrder", { state: { orderData } })
+      : navigate("/login", { state: { from: "/confirmOrder", orderData: orderData } });
   }
 
   return (

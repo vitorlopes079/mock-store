@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../store/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,7 +8,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const authState = useSelector((state) => state.auth);
+
+  const { orderData } = location.state || {
+    orderData: null,
+  };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -25,9 +30,13 @@ const Login = () => {
 
   useEffect(() => {
     if (authState.user) {
-      navigate("/user"); 
+      if (orderData) {
+        navigate("/confirmOrder", { state: { orderData } });
+      } else {
+        navigate("/user");
+      }
     }
-  }, [authState.user, navigate]);
+  }, [authState.user, navigate, orderData]);
 
   return (
     <div className="mx-auto my-4  sm:w-2/4 lg:w-1/4 ">
@@ -49,7 +58,6 @@ const Login = () => {
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             autoComplete="username"
-            
           />
           <label
             htmlFor="email"
@@ -94,7 +102,7 @@ const Login = () => {
       </form>
       <p className="font-nunito text-gray-800 mt-2 mb-4 italic text-center">
         Don't have an account?{" "}
-        <Link to="/login/newAccount">
+        <Link to="/login/newAccount" state={{ orderData }}>
           <span className="font-bold text-red-400 ml-1">Create one</span>
         </Link>
       </p>

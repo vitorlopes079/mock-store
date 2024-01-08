@@ -1,12 +1,12 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import SideNavBar from "./SideNavBar";
-import Bag from "../store/features/bag/Bag";
 import { useNavigate } from "react-router-dom";
+import SideNavBar from "./SideNavBar";
+import Bag from "./Bag";
 import Logo from "./Logo";
 import Icons from "./Icons";
+
 function Header({ toggleBag, toggleMenu, isMenuOpen }) {
   const navigate = useNavigate();
   const bagItems = useSelector((state) => state.bag.items);

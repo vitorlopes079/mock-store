@@ -70,13 +70,13 @@ const ChangePassword = () => {
           id="currentPassword"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="input-style peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="currentPassword"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6  "
         >
           Current Password
         </label>
@@ -88,13 +88,13 @@ const ChangePassword = () => {
           id="newPassword"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="input-style peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="newPassword"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           New Password
         </label>
@@ -106,13 +106,13 @@ const ChangePassword = () => {
           id="confirmNewPassword"
           value={confirmNewPassword}
           onChange={(e) => setConfirmNewPassword(e.target.value)}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="input-style peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="confirmNewPassword"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 "
         >
           Confirm New Password
         </label>

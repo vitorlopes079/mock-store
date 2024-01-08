@@ -17,7 +17,7 @@ function AboutUs() {
             <h1 className="h1-style-2 py-5">
               About Haute Couture
             </h1>
-            <p className="font-nunito text-gray-900 text-lg text-justify mb-4 md:tracking-wide">
+            <p className="p-style text-lg text-justify mb-4 md:tracking-wide">
               Welcome to Haute Couture, where fashion meets originality and
               style embraces individuality. Established with a vision to
               revolutionize the way we see and wear clothes, Haute Couture is

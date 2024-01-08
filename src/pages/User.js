@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchOrders } from "../store/features/orders/ordersSlice";
 import AdressForm from "../components/AdressForm";
-import ChangePassword from "./ChangePassword";
+import ChangePassword from "../components/ChangePassword";
 import { auth } from "../firebase";
 import MyOrders from "../components/MyOrders";
 

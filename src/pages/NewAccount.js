@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebase";
 import NewUserForm from "../components/NewUserForm";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setNewUser } from "../store/features/auth/authSlice";
 
@@ -18,6 +18,11 @@ const NewAccount = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
+  const location = useLocation();
+
+  const { orderData } = location.state || {
+    orderData: null,
+  };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -89,9 +94,17 @@ const NewAccount = () => {
 
   useEffect(() => {
     if (authState.user) {
-      navigate("/user");
+      const { orderData } = location.state || {
+        orderData: null,
+      };
+
+      if (orderData) {
+        navigate("/confirmOrder", { state: { orderData } });
+      } else {
+        navigate("/user")
+      }
     }
-  }, [authState.user, navigate]);
+  }, [authState.user, navigate, location.state]);
 
   return (
     <NewUserForm
