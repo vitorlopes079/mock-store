@@ -20,10 +20,6 @@ const NewAccount = () => {
   const authState = useSelector((state) => state.auth);
   const location = useLocation();
 
-  const { orderData } = location.state || {
-    orderData: null,
-  };
-
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
