@@ -25,4 +25,8 @@
   .label-style {
     @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]
   }
+
+  .sideNavBarLink-style{
+    @apply font-montserrat my-3 hover:bg-gray-200 p-2 rounded text-gray-900 text-lg font-bold tracking-wider border-b-2
+  }
 }

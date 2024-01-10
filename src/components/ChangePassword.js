@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   getAuth,
   reauthenticateWithCredential,
@@ -7,124 +8,131 @@ import {
 } from "firebase/auth";
 
 const ChangePassword = () => {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function handlePasswordChange(e) {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    const { currentPassword, newPassword, confirmNewPassword } = data;
+    setSuccessMessage("");
+    setErrorMessage("");
 
     if (newPassword !== confirmNewPassword) {
-      setSuccessMessage(null)
       setErrorMessage("Passwords do not match!");
-      
       return;
     }
-
-    // Assume additional validations are added here
 
     const auth = getAuth();
     const user = auth.currentUser;
     const credential = EmailAuthProvider.credential(
-      user.email, // Assuming the email is available in the user object
+      user.email,
       currentPassword
     );
 
     reauthenticateWithCredential(user, credential)
       .then(() => {
-        // User re-authenticated, now update the password
         updatePassword(user, newPassword)
           .then(() => {
-            setErrorMessage(null)
             setSuccessMessage("✓ Your password has been successfully updated!");
-            // Reset password fields or additional logic after successful update
-            setCurrentPassword("");
-            setNewPassword("");
-            setConfirmNewPassword("");
           })
           .catch((error) => {
-            // Handle errors from password update
             console.error("Error updating password:", error);
-            setSuccessMessage(null)
             setErrorMessage("Error updating password. Please try again.");
           });
       })
       .catch((error) => {
-        // Handle errors from reauthentication
         console.error("Error reauthenticating:", error);
-        setSuccessMessage(null)
         setErrorMessage(
           "Current password is incorrect or other authentication error."
         );
       });
-  }
+  };
 
   return (
-    <form onSubmit={handlePasswordChange}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {/* Current Password Field */}
       <div className="relative z-0 w-full mb-6 group">
         <input
           type="password"
-          id="currentPassword"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
+          {...register("currentPassword", { required: true })}
           className="input-style peer"
           placeholder=" "
-          required
         />
+
         <label
           htmlFor="currentPassword"
-          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6  "
+          className="label-style peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:font-medium"
         >
           Current Password
         </label>
       </div>
+
       {/* New Password Field */}
       <div className="relative z-0 w-full mb-6 group">
         <input
           type="password"
-          id="newPassword"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
+          {...register("newPassword", { required: true })}
           className="input-style peer"
           placeholder=" "
-          required
         />
+
         <label
           htmlFor="newPassword"
-          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="label-style peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:font-medium"
         >
           New Password
         </label>
       </div>
+
       {/* Confirm New Password Field */}
-      <div className="relative z-0 w-full  group">
+      <div className="relative z-0 w-full mb-6 group">
         <input
           type="password"
-          id="confirmNewPassword"
-          value={confirmNewPassword}
-          onChange={(e) => setConfirmNewPassword(e.target.value)}
+          {...register("confirmNewPassword", { required: true })}
           className="input-style peer"
           placeholder=" "
-          required
         />
+
         <label
           htmlFor="confirmNewPassword"
-          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 "
+          className="label-style peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:font-medium"
         >
           Confirm New Password
         </label>
       </div>
-      <div>
+
+      <div className="flex flex-col justify-start items-start">
+        {/* Error and Success Messages */}
         {errorMessage && (
           <div className="text-red-400 font-bold mt-2">{errorMessage}</div>
         )}
         {successMessage && (
           <div className="text-blue-400 font-bold mt-2">{successMessage}</div>
         )}
-        <button type="submit" className="text-red-400 underline font-bold my-6">
+        {errors.currentPassword && (
+          <span className="text-red-400 font-bold mt-2">
+            Current password field is required
+          </span>
+        )}
+        {errors.newPassword && (
+          <span className="text-red-400 font-bold mt-2">
+            New password field is required
+          </span>
+        )}
+        {errors.confirmNewPassword && (
+          <span className="text-red-400 font-bold mt-2">
+            confirm new password field is required
+          </span>
+        )}
+        <button
+          type="submit"
+          className="text-red-400 underline font-bold mt-2 mb-6"
+        >
           Change Password
         </button>
       </div>

@@ -1,63 +1,47 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAddress,
   updateAddress,
 } from "../store/features/address/addressSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase";
 
-const AdressForm = () => {
-  const [addressLine1, setAddressLine1] = useState("");
-  const [addressLine2, setAddressLine2] = useState("");
-  const [postcode, setPostcode] = useState("");
-  const [city, setCity] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+const AddressForm = () => {
   const dispatch = useDispatch();
   const address = useSelector((state) => state.address.address);
   const userId = auth.currentUser?.uid;
 
+  // Initialize useForm hook
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  // State for success and error messages
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Fetch address effect
   useEffect(() => {
     dispatch(fetchAddress(userId));
   }, [dispatch, userId]);
 
+  // Reset form fields when address is fetched
   useEffect(() => {
     if (address) {
-      setAddressLine1(address.addressLine1);
-      setAddressLine2(address.addressLine2);
-      setPostcode(address.postcode);
-      setCity(address.city);
+      reset(address);
     }
-  }, [address]);
+  }, [address, reset]);
 
-  function handleAddressLine1Change(event) {
-    setAddressLine1(event.target.value);
-  }
-
-  function handleAddressLine2Change(event) {
-    setAddressLine2(event.target.value);
-  }
-
-  function handlePostcodeChange(event) {
-    setPostcode(event.target.value);
-  }
-
-  function handleCityChange(event) {
-    setCity(event.target.value);
-  }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setSuccessMessage(null);
-    setErrorMessage(null);
+  // Submit handler
+  const onSubmit = async (data) => {
+    setSuccessMessage("");
+    setErrorMessage("");
     if (userId) {
-      const newAddress = {
-        addressLine1,
-        addressLine2,
-        postcode,
-        city,
-      };
-      dispatch(updateAddress({ userId, newAddress }))
+      dispatch(updateAddress({ userId, newAddress: data }))
         .unwrap()
         .then(() => {
           setSuccessMessage("Your address has been successfully updated!");
@@ -70,21 +54,16 @@ const AdressForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {/* Address Line 1 Field */}
       <div className="relative z-0 w-full mb-6 group">
         <input
-          type="text"
-          id="addressLine1"
-          value={addressLine1}
+          {...register("addressLine1", { required: true })}
           className="input-style peer"
-          placeholder=""
-          onChange={handleAddressLine1Change}
+          placeholder=" "
         />
-        <label
-          htmlFor="addressLine1"
-          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
+
+        <label className="label-style peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:font-medium">
           Address Line 1
         </label>
       </div>
@@ -92,17 +71,11 @@ const AdressForm = () => {
       {/* Address Line 2 Field */}
       <div className="relative z-0 w-full mb-6 group">
         <input
-          type="text"
-          id="addressLine2"
-          value={addressLine2}
+          {...register("addressLine2")}
           className="input-style peer"
           placeholder=" "
-          onChange={handleAddressLine2Change}
         />
-        <label
-          htmlFor="addressLine2"
-          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
+        <label className="label-style peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:font-medium">
           Address Line 2
         </label>
       </div>
@@ -110,17 +83,12 @@ const AdressForm = () => {
       {/* Postcode Field */}
       <div className="relative z-0 w-full mb-6 group">
         <input
-          type="text"
-          id="postcode"
-          value={postcode}
+          {...register("postcode", { required: true })}
           className="input-style peer"
           placeholder=" "
-          onChange={handlePostcodeChange}
         />
-        <label
-          htmlFor="postcode"
-          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
+
+        <label className="label-style peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:font-medium">
           Postcode
         </label>
       </div>
@@ -128,37 +96,49 @@ const AdressForm = () => {
       {/* City Field */}
       <div className="relative z-0 w-full mb-6 group">
         <input
-          type="text"
-          id="city"
-          value={city}
+          {...register("city", { required: true })}
           className="input-style peer"
           placeholder=" "
-          onChange={handleCityChange}
         />
-        <label
-          htmlFor="city"
-          className="label-style peer-focus:font-medium peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
+
+        <label className="label-style peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:font-medium">
           City
         </label>
+      </div>
+      <div className="flex flex-col justify-start items-start">
+        {/* Success and Error Messages */}
+        {successMessage && (
+          <div className="text-blue-400 font-bold mt-2">✓ {successMessage}</div>
+        )}
+        {errorMessage && (
+          <div className="text-red-400 font-bold mt-2">{errorMessage}</div>
+        )}
+        {errors.addressLine1 && (
+          <span className="text-red-400 font-bold mt-2">
+            Address field is required
+          </span>
+        )}
+        {errors.postcode && (
+          <span className="text-red-400 font-bold mt-2">
+            {" "}
+            Postcode field is required
+          </span>
+        )}
+        {errors.city && (
+          <span className="text-red-400 font-bold mt-2">
+            City field is required
+          </span>
+        )}
 
-        <div>
-          {successMessage && (
-            <div className="text-blue-400 font-bold mt-2">✓ {successMessage}</div>
-          )}
-          {errorMessage && (
-            <div className="text-red-400 font-bold mt-2">{errorMessage}</div>
-          )}
-          <button
-            type="submit"
-            className="text-red-400 underline font-bold my-6"
-          >
-            Update address
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="text-red-400 underline font-bold mt-2 mb-6"
+        >
+          Update address
+        </button>
       </div>
     </form>
   );
 };
 
-export default AdressForm;
+export default AddressForm;

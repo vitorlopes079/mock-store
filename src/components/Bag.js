@@ -9,6 +9,7 @@ import {
 } from "../store/features/bag/bagSlice";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { getBagStyle } from "../utilities/bagSlider";
 
 function Bag({ isBagOpen, toggleBag }) {
   const items = useSelector((state) => state.bag.items);
@@ -17,17 +18,7 @@ function Bag({ isBagOpen, toggleBag }) {
   const totalAmount = useSelector((state) => state.bag.totalAmount);
   const isLoggedIn = useSelector((state) => state.auth.user);
   const userId = auth.currentUser?.uid;
-
-  const bagStyle = {
-    position: "fixed",
-    top: 0,
-    right: isBagOpen ? 0 : "-150%",
-    width: "350px",
-    height: "100%",
-    backgroundColor: "#edf2f7",
-    transition: "right 0.3s ease-in-out",
-    zIndex: 100,
-  };
+  const bagStyle = getBagStyle(isBagOpen);
 
   function handleClick() {
     const totalPrice = totalAmount;
@@ -46,7 +37,9 @@ function Bag({ isBagOpen, toggleBag }) {
     toggleBag();
     isLoggedIn
       ? navigate("/confirmOrder", { state: { orderData } })
-      : navigate("/login", { state: { from: "/confirmOrder", orderData: orderData } });
+      : navigate("/login", {
+          state: { from: "/confirmOrder", orderData: orderData },
+        });
   }
 
   return (
