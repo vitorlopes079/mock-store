@@ -5,11 +5,11 @@ function AboutUs() {
   return (
     <div id="aboutUs">
       <div className="w-11/12 my-4 bg-gray-100 p-4 rounded mx-auto">
-        <div className="flex flex-col items-center md:block">
+        <div className="flex flex-col items-center md:block ">
           <img
             src={aboutUsModel}
             alt="Haute Couture Model"
-            className="w-full md:float-left md:mr-4 mb-4 md:mb-4 md:h-380 md:w-560"
+            className=" md:float-left md:mr-4 mb-4 md:mb-4 md:h-560 md:w-380"
             
           />
 
