@@ -19,6 +19,7 @@ function ItemContainer({ id, title, price, description, image, category }) {
           src={image}
           alt={`${title} in category ${category}`}
           className="h-48 w-full my-6"
+          loading="lazy"
         />
       </Link>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import aboutUsModel from "../images/aboutUsModel.jpg";
+import aboutUsModel from "../images/aboutUsModel.png";
 
 function AboutUs() {
   return (
@@ -9,8 +9,8 @@ function AboutUs() {
           <img
             src={aboutUsModel}
             alt="Haute Couture Model"
-            className="w-full md:float-left md:mr-4 mb-4 md:mb-4"
-            style={{ maxWidth: "380px", maxHeight: "568px" }}
+            className="w-full md:float-left md:mr-4 mb-4 md:mb-4 md:h-380 md:w-560"
+            
           />
 
           <div>
