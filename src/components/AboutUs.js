@@ -9,7 +9,10 @@ function AboutUs() {
           <img
             src={aboutUsModel}
             alt="Haute Couture Model"
-            className=" md:float-left md:mr-4 mb-4 md:mb-4 md:h-560 md:w-380"
+            className=" md:float-left md:mr-4 mb-4 md:mb-4 w-auto h-auto max-w-380 max-h-560"
+            width="280px"
+            height="420px"
+            
             
           />
 
