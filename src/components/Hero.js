@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/logo.png";
 import model from "../images/model.jpg";
-import model2 from "../images/model2.jpg";
 
 const Hero = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -35,7 +34,7 @@ const Hero = () => {
       <div className="flex justify-center items-center md:bg-gray-400 border-b border-black w-full">
         <img
           className="md:rounded w-full"
-          src={windowWidth > 768 ? model : model2}
+          src={windowWidth > 768 ? model : "/model2.jpg"}
           alt="Woman holding a sheer fabric aloft, with a cloudy sky in the background"
         />
       </div>
