@@ -12,8 +12,7 @@ function AboutUs() {
             className=" md:float-left md:mr-4 mb-4 md:mb-4 w-auto h-auto max-w-380 max-h-560"
             width="280px"
             height="420px"
-            
-            
+  
           />
 
           <div>

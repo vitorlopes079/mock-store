@@ -5,7 +5,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-
+import { shuffleArray } from "../../../utilities/suffleFunction";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
@@ -19,11 +19,26 @@ export const fetchProducts = createAsyncThunk(
         getDocs(collection(firestore, "accessories")),
       ]);
       return {
-        menTop: response[0].docs.map((doc) => ({ ...doc.data(), category: 'menTop' })),
-        menBottom: response[1].docs.map((doc) => ({ ...doc.data(), category: 'menBottom' })),
-        womenTop: response[2].docs.map((doc) => ({ ...doc.data(), category: 'womenTop' })),
-        womenBottom: response[3].docs.map((doc) => ({ ...doc.data(), category: 'womenBottom' })),
-        accessories: response[4].docs.map((doc) => ({ ...doc.data(), category: 'accessories' })),
+        menTop: response[0].docs.map((doc) => ({
+          ...doc.data(),
+          category: "menTop",
+        })),
+        menBottom: response[1].docs.map((doc) => ({
+          ...doc.data(),
+          category: "menBottom",
+        })),
+        womenTop: response[2].docs.map((doc) => ({
+          ...doc.data(),
+          category: "womenTop",
+        })),
+        womenBottom: response[3].docs.map((doc) => ({
+          ...doc.data(),
+          category: "womenBottom",
+        })),
+        accessories: response[4].docs.map((doc) => ({
+          ...doc.data(),
+          category: "accessories",
+        })),
       };
     } catch (error) {
       console.error("Error in fetchProducts:", error);
@@ -44,6 +59,7 @@ const initialState = {
   womenTop: womenTopAdapter.getInitialState(),
   womenBottom: womenBottomAdapter.getInitialState(),
   accessories: accessoriesAdapter.getInitialState(),
+  bestSellers: [],
   status: "idle",
   error: null,
 };
@@ -51,7 +67,21 @@ const initialState = {
 const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    shuffleBestSellers: (state) => {
+      const combinedProducts = [
+        ...Object.values(state.menTop.entities),
+        ...Object.values(state.menBottom.entities),
+        ...Object.values(state.womenTop.entities),
+        ...Object.values(state.womenBottom.entities),
+        ...Object.values(state.accessories.entities),
+      ];
+
+      if (combinedProducts.length > 0) {
+        state.bestSellers = shuffleArray(combinedProducts).slice(0, 6);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -99,6 +129,8 @@ const accessoriesSelectors = accessoriesAdapter.getSelectors(
   selectAccessoriesState
 );
 
+const selectBestSellers = (state) => state.products.bestSellers;
+
 // Export the selectors
 export {
   menTopSelectors,
@@ -106,6 +138,9 @@ export {
   womenTopSelectors,
   womenBottomSelectors,
   accessoriesSelectors,
+  selectBestSellers,
 };
+
+export const { shuffleBestSellers } = productsSlice.actions;
 
 export default productsSlice.reducer;

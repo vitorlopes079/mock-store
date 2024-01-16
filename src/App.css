@@ -35,3 +35,19 @@
   justify-content: center;
  
 }
+
+/* Reserve space for the image with aspect ratio in about us page*/
+.aspect-ratio-box {
+  height: 0;
+  overflow: hidden;
+  padding-top: 66.67%; /* Aspect ratio of 3:2 (height:width) */
+  position: relative;
+}
+
+.aspect-ratio-box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}

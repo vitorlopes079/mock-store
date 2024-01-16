@@ -8,7 +8,7 @@ const MyOrders = () => {
   const dispatch = useDispatch();
   const userId = auth.currentUser?.uid;
   const orders = useSelector((state) => state.orders.orders);
-  console.log("orders", orders)
+ 
 
   useEffect(() => {
     dispatch(fetchOrders(userId));
