@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import logo from "../images/logo.png";
-import model from "../images/model.jpg";
+import logo from "../images/logo.webp";
+import model from "../images/model.webp";
 
 const Hero = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

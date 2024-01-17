@@ -1,25 +1,26 @@
 import React from "react";
-import aboutUsModel from "../images/aboutUsModel.png";
+import aboutUsModel from "../images/aboutUsModel.webp";
 
 function AboutUs() {
   return (
-    <div id="aboutUs">
-      <div className="w-11/12 my-4 bg-gray-100 p-4 rounded mx-auto">
-        <div className="flex flex-col items-center md:block ">
-          <img
-            src={aboutUsModel}
-            alt="Haute Couture Model"
-            className=" md:float-left md:mr-4 mb-4 md:mb-4 w-auto h-auto max-w-380 max-h-560"
-            width="280px"
-            height="420px"
-  
-          />
+    <div className="p-4">
+      <div className="my-4 bg-gray-100 p-4 rounded">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start">
+          <div className=" min-w-280 min-h-420 max-w-380 max-h-560 md:mr-4 mb-8 ">
+            <img
+              src={aboutUsModel}
+              alt="Haute Couture Model"
+              className="w-auto h-auto max-w-380 max-h-560"
+              width="280px"
+              height="420px"
+            />
+          </div>
 
-          <div>
-            <h1 className="h1-style-2 py-5">
+          <div className="w-full lg:w-4/6">
+            <h1 className="h1-style-2 text-2xl lg:text-4xl pb-5">
               About Haute Couture
             </h1>
-            <p className="p-style text-lg text-justify mb-4 md:tracking-wide">
+            <p className="p-style lg:text-lg text-justify mb-4 md:tracking-wide">
               Welcome to Haute Couture, where fashion meets originality and
               style embraces individuality. Established with a vision to
               revolutionize the way we see and wear clothes, Haute Couture is
